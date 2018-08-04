@@ -25,10 +25,6 @@ fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
     let mut output: Vec<i64> = Vec::new();
     let len_one = one.remove(0);
     let len_two = two.remove(0);
-    // assert both vectors are of equal length
-    if len_one != len_two {
-        return output;
-    }
 
     let mut ix: usize = 0;
     while ix < one.len() {
