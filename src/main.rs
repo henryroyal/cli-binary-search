@@ -27,12 +27,12 @@ fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
     let len_two = two.remove(0);
 
     let mut ix: usize = 0;
-    while ix < one.len() {
+    while ix < two.len() {
         let query = two[ix];
 
         let mut lower_bound = 0;
-        let mut midpoint = two.len() / 2;
-        let mut upper_bound = two.len();
+        let mut midpoint = one.len() / 2;
+        let mut upper_bound = one.len();
         loop {
             if DEBUG { println!("q: {}\tub: {}\tlb:{}\tmp:{}", query, upper_bound, lower_bound, midpoint) }
 
@@ -66,7 +66,7 @@ fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
                 }
 
                 lower_bound = midpoint;
-                midpoint = (upper_bound + lower_bound) / 2;
+                midpoint = lower_bound + (upper_bound - lower_bound) / 2;
             }
         }
 
