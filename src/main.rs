@@ -8,15 +8,16 @@ fn main() {
     }
 }
 
-/*
-Inputs are two lines of whitespace delimited integers.
-The first line consists of distinct positive integers in increasing order.
-The second line consists of positive integers.
-These inputs have been converted to vectors.
 
-In both cases, the zero-index value represents the length of the remaining array.
-For each item in the second vector, return the index of that item within the first.
-If the item in question is absent from the first vector, return -1.
+/*
+    Inputs are two lines of whitespace delimited integers.
+    The first line consists of distinct positive integers in increasing order.
+    The second line consists of positive integers.
+    These inputs have been converted to vectors.
+
+    In both cases, the zero-index value represents the length of the remaining array.
+    For each item in the second vector, return the index of that item within the first.
+    If the item in question is absent from the first vector, return -1.
 */
 fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
 {
@@ -43,9 +44,9 @@ fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
             }
 
             // if query is less than midpoint,
-            // set upper bound to midpoint,
-            // set midpoint to upper bound / 2
-            // continue
+            // and upper bound is midpoint, assume query not in array
+            // otherwise set upper bound to midpoint,
+            // and set midpoint to upper bound / 2
             if query < one[midpoint] {
                 if upper_bound == midpoint {
                     output.push(-1);
@@ -53,12 +54,13 @@ fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
                 }
                 upper_bound = midpoint;
                 midpoint = upper_bound / 2;
+                continue;
             }
 
             // if query is greater than midpoint
-            // set lower bound to midpoint
-            // set midpoint to midpoint / 2
-            // continue
+            // and lower bound is midpoint, assume query not in array
+            // otherwise set lower bound to midpoint
+            // and set midpoint to lower_bound + (upper_bound - lower_bound)
             if query > one[midpoint] {
                 if lower_bound == midpoint {
                     output.push(-1);
@@ -67,6 +69,7 @@ fn binary_search(mut one: Vec<i64>, mut two: Vec<i64>) -> Vec<i64>
 
                 lower_bound = midpoint;
                 midpoint = lower_bound + (upper_bound - lower_bound) / 2;
+                continue;
             }
         }
 
